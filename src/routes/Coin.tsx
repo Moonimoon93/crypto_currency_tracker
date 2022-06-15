@@ -195,7 +195,7 @@ function Coin() {
               <span>{priceData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>MAX SUPPLY : </span>
+              <span>MAXxxSUPPLY : </span>
               <span>{priceData?.max_supply}</span>
             </OverviewItem>
           </Overview>
