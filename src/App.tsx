@@ -1,5 +1,6 @@
 import Router from "./Router";
 import { createGlobalStyle } from "styled-components";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap');
@@ -56,11 +57,12 @@ table {
 }
 body {
   font-family: 'Oswald', sans-serif;
-  background-color: ${(props) => props.theme.bgColor}
-  color: ${(props) => props.theme.textColor}
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
 `;
 
@@ -69,6 +71,8 @@ function App() {
     <>
       <GlobalStyle />
       <Router />
+      {/* React Query Devtool render */}
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }
