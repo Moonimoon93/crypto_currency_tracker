@@ -81,6 +81,7 @@ const Tab = styled.div<{ isActive: boolean }>`
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
 `;
+const Button = styled.button``;
 
 interface RouteParams {
   coinId: string;
@@ -161,6 +162,9 @@ function Coin() {
   const { isLoading: priceLoading, data: priceData } = useQuery(
     ["price", coinId],
     () => fetchCoinPrice(coinId)
+    // {
+    //   refetchInterval: 5000,
+    // }
   );
   const loading = infoLoading || priceLoading;
   return (
@@ -184,8 +188,8 @@ function Coin() {
               <span> {infoData?.symbol} </span>
             </OverviewItem>
             <OverviewItem>
-              <span> Open Source : </span>
-              <span> {infoData?.open_source ? "Yes" : "No"} </span>
+              <span> Price : </span>
+              <span> {priceData?.quotes.USD.price.toFixed(2)} </span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -195,7 +199,7 @@ function Coin() {
               <span>{priceData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>MAXxxSUPPLY : </span>
+              <span>MAX UPPLY : </span>
               <span>{priceData?.max_supply}</span>
             </OverviewItem>
           </Overview>
@@ -209,7 +213,7 @@ function Coin() {
           </TabsContainer>
           <Switch>
             <Route path="/:coinId/price">
-              <Price />
+              <Price coinId={coinId}/>
             </Route>
             <Route path="/:coinId/chart">
               <Chart coinId={coinId} />

@@ -36,8 +36,21 @@ function Chart({ coinId }: ChartProps) {
             },
           ]}
           options={{
-            chart: { height: 500, width: 500 },
+            chart: {
+              height: 500,
+              width: 500,
+              toolbar: { show: false },
+              background: "transparent",
+            },
+            grid: { show: false },
             theme: { mode: "dark" },
+            stroke: { curve: "smooth", width: 5 },
+            yaxis: { labels: { show: true }, axisBorder: { show: true } },
+            xaxis: {
+              labels: { show: true },
+              axisTicks: { show: true},
+              axisBorder: { show: true },
+            },
           }}
         />
       )}
