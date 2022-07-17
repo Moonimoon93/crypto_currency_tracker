@@ -9,27 +9,27 @@ interface PriceProps {
   coinId: string;
 }
 interface IData {
-time_open: string;
-time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-  market_cap: number;
+  time_open?: number;
+  time_close?: number;
+  open?: string;
+  high?: string;
+  low?: string;
+  close?: string;
+  volume?: string;
+  market_cap?: number;
 }
 
 function Price({ coinId }: PriceProps) {
-  const { isLoading, data } = useQuery<IData[]>(["candle", coinId], () =>
+  const { isLoading, data: datas } = useQuery<IData[]>(["candle", coinId], () =>
     fetchNiccoApi(coinId)
   );
   console.log(
-    data?.map((price) => [
-      price.time_open,
-      price.open,
-      price.high,
-      price.low,
-      price.close,
+    datas?.map((data) => [
+      data.open,
+      typeof data.open,
+      data.high,
+      data.low,
+      data.close,
     ])
   );
   return (
@@ -41,12 +41,13 @@ function Price({ coinId }: PriceProps) {
           type="candlestick"
           series={[
             {
-              data: [
-                {
-                  x: new Date(),
-                  y: [53.98, 56.29, 51.59, 53.85],
-                },
-              ],
+              data: datas?.map((data) => [
+                data.time_open,
+                data.open,
+                data.high,
+                data.low,
+                data.close,
+              ]),
             },
           ]}
           options={{

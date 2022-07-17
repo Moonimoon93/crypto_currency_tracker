@@ -178,6 +178,9 @@ function Coin() {
         <Loader>Loading . . .</Loader>
       ) : (
         <Container>
+          <button style={{ marginBottom: 10, justifySelf: "center" }}>
+            <Link to={"/"}>Go Back</Link>
+          </button>
           <Overview>
             <OverviewItem>
               <span>RANK : </span>
@@ -213,7 +216,7 @@ function Coin() {
           </TabsContainer>
           <Switch>
             <Route path="/:coinId/price">
-              <Price coinId={coinId}/>
+              <Price coinId={coinId} />
             </Route>
             <Route path="/:coinId/chart">
               <Chart coinId={coinId} />
