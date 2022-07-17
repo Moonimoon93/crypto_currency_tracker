@@ -3,7 +3,6 @@ import Coins from "./routes/Coins";
 import Coin from "./routes/Coin";
 import Price from "./routes/Price";
 import Chart from "./routes/Chart";
-import { info } from "console";
 
 function Router() {
   return (

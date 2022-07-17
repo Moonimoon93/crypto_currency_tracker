@@ -28,11 +28,16 @@ function Chart({ coinId }: ChartProps) {
         "Loading Chart"
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Sales",
-              data: data?.map((price) => price.close) as number[],
+              data: data?.map((me) => [
+                me.time_open,
+                me.open,
+                me.high,
+                me.low,
+                me.close,
+              ]) as [],
             },
           ]}
           options={{
@@ -48,7 +53,7 @@ function Chart({ coinId }: ChartProps) {
             yaxis: { labels: { show: true }, axisBorder: { show: true } },
             xaxis: {
               labels: { show: true },
-              axisTicks: { show: true},
+              axisTicks: { show: true },
               axisBorder: { show: true },
             },
           }}

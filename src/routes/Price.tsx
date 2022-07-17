@@ -20,8 +20,9 @@ interface IData {
 }
 
 function Price({ coinId }: PriceProps) {
-  const { isLoading, data: datas } = useQuery<IData[]>(["candle", coinId], () =>
-    fetchNiccoApi(coinId)
+  const { isLoading, data: datas } = useQuery<IData[]>(
+    ["priceInfo", coinId],
+    () => fetchNiccoApi(coinId)
   );
   console.log(
     datas?.map((data) => [
@@ -33,43 +34,17 @@ function Price({ coinId }: PriceProps) {
     ])
   );
   return (
-    <div>
+    <>
       {isLoading ? (
         "Loading Chart"
       ) : (
-        <ApexChart
-          type="candlestick"
-          series={[
-            {
-              data: datas?.map((data) => [
-                data.time_open,
-                data.open,
-                data.high,
-                data.low,
-                data.close,
-              ]),
-            },
-          ]}
-          options={{
-            chart: {
-              height: 500,
-              width: 500,
-              toolbar: { show: false },
-              background: "transparent",
-            },
-            grid: { show: false },
-            theme: { mode: "dark" },
-            stroke: { curve: "smooth", width: 5 },
-            yaxis: { labels: { show: true }, axisBorder: { show: true } },
-            xaxis: {
-              labels: { show: true },
-              axisTicks: { show: true },
-              axisBorder: { show: true },
-            },
-          }}
-        />
+        <>
+          {datas?.map((data) => (
+            <div> {data.close} </div>
+          ))}
+        </>
       )}
-    </div>
+    </>
   );
 }
 
